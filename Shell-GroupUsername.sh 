@@ -1,0 +1,31 @@
+#!/bin/bash
+mkdir tempdir
+cp PythonA.py tempdir/.
+cp PythonB_listrooms.py tempdir/.
+cp PythonB_addmembers.py tempdir/.
+cp PythonB_createrooms.py tempdir/.
+cp PythonB_listmembers.py tempdir/.
+
+echo "FROM python" > tempdir/Dockerfile
+
+echo "RUN pip install flask" >> tempdir/Dockerfile
+
+echo "COPY PythonA.py /home/devasc/ExHab_ParedesAguilarMarisa" >> tempdir/Dockerfile
+echo "COPY PythonB_listrooms.py /home/devasc/ExHab_ParedesAguilarMarisa" >> tempdir/Dockerfile
+echo "COPY PythonB_addmembers.py /home/devasc/ExHab_ParedesAguilarMarisa" >> tempdir/Dockerfile
+echo "COPY PythonB_createrooms.py /home/devasc/ExHab_ParedesAguilarMarisa" >> tempdir/Dockerfile
+echo "COPY PythonB_listmembers.py /home/devasc/ExHab_ParedesAguilarMarisa" >> tempdir/Dockerfile
+
+
+echo "CMD python3 PythonA.py" >> tempdir/Dockerfile
+echo "CMD python3 PythonB_addmembers.py" >> tempdir/Dockerfile
+echo "CMD python3 PythonB_createrooms.py" >> tempdir/Dockerfile
+echo "CMD python3 PythonB_listmembers.py" >> tempdir/Dockerfile
+echo "CMD python3 PythonB_listrooms.py" >> tempdir/Dockerfile
+
+
+cd tempdir
+docker build -t sellapp .
+
+docker ps -a
+
